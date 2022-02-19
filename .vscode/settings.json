@@ -22,5 +22,6 @@
         "**/yotta_modules": true,
         "**/yotta_targets": true,
         "**/pxt_modules": true
-    }
+    },
+    "C_Cpp.dimInactiveRegions": false
 }
