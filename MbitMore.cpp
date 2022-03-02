@@ -15,6 +15,7 @@
 using MbitMoreService = MbitMoreServiceDAL;
 #endif // NOT MICROBIT_CODAL
 
+
 //% color=#FF9900 weight=95 icon="\uf1b0"
 namespace MbitMore {
   MbitMoreService *_pService = NULL;
@@ -27,6 +28,9 @@ namespace MbitMore {
     while (NULL != _pService) {
       _pService->update();
       fiber_sleep(UPDATE_PERIOD);
+      
+  
+
     }
   }
 
@@ -36,6 +40,7 @@ namespace MbitMore {
       _pService->notify();
       fiber_sleep(NOTIFY_PERIOD);
     }
+    
   }
 
   /**

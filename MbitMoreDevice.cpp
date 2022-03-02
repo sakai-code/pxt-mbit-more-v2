@@ -218,6 +218,10 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.display.stopAnimation(); // To stop display friendly name.
   uBit.display.print("M");
   serialConnected = true;
+
+ 
+
+
 }
 
 /**

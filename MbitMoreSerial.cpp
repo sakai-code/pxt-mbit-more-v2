@@ -11,6 +11,7 @@ static MbitMoreSerial *serial; // Hold it as a static pointer to be called by cr
  */
 void startMbitMoreSerialReceiving() {
   serial->startSerialReceiving();
+ 
 }
 
 /**
@@ -19,6 +20,7 @@ void startMbitMoreSerialReceiving() {
  */
 void startMbitMoreSerialUpdating() {
   serial->startSerialUpdating();
+  
 }
 
 /**
@@ -28,7 +30,9 @@ void startMbitMoreSerialUpdating() {
  */
 uint8_t readSync() {
   fiber_sleep(1); // Need to prevent from freezing
-  return uBit.serial.read(SYNC_SLEEP);
+    return uBit.serial.read(SYNC_SLEEP);
+  
+  
 }
 
 /**
@@ -57,6 +61,7 @@ MbitMoreSerial::MbitMoreSerial(MbitMoreDevice &_mbitMore) : mbitMore(_mbitMore) 
   uBit.serial.baud((int)rate);
 #endif
   create_fiber(startMbitMoreSerialReceiving);
+
 }
 
 void MbitMoreSerial::readResponseOnSerial(uint16_t ch, uint8_t *dataBuffer, size_t len) {
@@ -72,6 +77,7 @@ void MbitMoreSerial::readResponseOnSerial(uint16_t ch, uint8_t *dataBuffer, size
   while ((MM_TX_BUFFER_SIZE - uBit.serial.txBufferedSize()) < (int)frameSize) {
     fiber_sleep(1);
   }
+ 
   uBit.serial.send(frame, frameSize, ASYNC);
 }
 
@@ -87,6 +93,7 @@ void MbitMoreSerial::writeResponseOnSerial(uint16_t ch, bool response) {
   while ((MM_TX_BUFFER_SIZE - uBit.serial.txBufferedSize()) < 7) {
     fiber_sleep(1);
   }
+ 
   uBit.serial.send(frame, 7, SYNC_SLEEP);
 }
 
@@ -103,6 +110,7 @@ void MbitMoreSerial::notifyOnSerial(uint16_t ch, uint8_t *dataBuffer, size_t len
   while ((MM_TX_BUFFER_SIZE - uBit.serial.txBufferedSize()) < (int)frameSize) {
     fiber_sleep(1);
   }
+  
   uBit.serial.send(frame, frameSize, ASYNC);
 }
 
@@ -120,6 +128,8 @@ void MbitMoreSerial::startSerialUpdating() {
       fiber_sleep(20);
     }
   }
+
+
 }
 
 void MbitMoreSerial::startSerialReceiving() {
@@ -264,9 +274,11 @@ void MbitMoreSerial::startSerialReceiving() {
       }
     }
 
+
     // Not matched
     frameReceived--;
     memmove(frame, frame + 1, frameReceived);
+
   }
 }
 
