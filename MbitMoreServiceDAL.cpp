@@ -41,6 +41,7 @@ const uint8_t MBIT_MORE_CH_ANALOG_IN_P2[] = {0x0b, 0x50, 0x01, 0x22, 0x60, 0x7f,
  */
 MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
   mbitMore = &MbitMoreDevice::getInstance();
+  /**
   mbitMore->moreService = this;
 
   commandCh = new GattCharacteristic(
@@ -98,7 +99,7 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
   analogInP2Ch->setReadAuthorizationCallback(
       this, &MbitMoreServiceDAL::onReadAnalogIn);
   analogInP2Ch->requireSecurity(SecurityManager::MICROBIT_BLE_SECURITY_LEVEL);
-
+ */ //add disable ble 
   /*
   stateCh = digitalIn[4], lightLevel[1], temperature[1], microphone[1]
   directionCh = acceleration[10], magnet[8]
