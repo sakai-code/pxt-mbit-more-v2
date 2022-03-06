@@ -5,7 +5,7 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "bluetooth": "*"
+        "radio": "*"
     },
     "files": [
         "README.md",
@@ -33,28 +33,6 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj",
-    "yotta": {
-        "dependencies": {
-            "microbit": "yokobond/microbit#mbit-more"
-        },
-        "config": {
-            "microbit-dal": {
-                "bluetooth": {
-                    "enabled": 1,
-                    "pairing_mode": 0,
-                    "private_addressing": 0,
-                    "open": 1,
-                    "whitelist": 0,
-                    "advertising_timeout": 0,
-                    "tx_power": 0,
-                    "dfu_service": 0,
-                    "event_service": 0,
-                    "device_info_service": 0,
-                    "security_level": "SECURITY_MODE_ENCRYPTION_NO_MITM"
-                },
-                "gatt_table_size": "0x360"
-            }
-        }
-    }
+    "preferredEditor": "blocksprj"
+    
 }

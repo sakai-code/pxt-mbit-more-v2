@@ -936,7 +936,7 @@ void MbitMoreDevice::setServoValue(int pinIndex, int angle, int range,
 void MbitMoreDevice::displayFriendlyName() {
   if (serialConnected)
     return;
-  uBit.display.scrollAsync(ManagedString(microbit_friendly_name()), 120);
+  uBit.display.scrollAsync(ManagedString("connnect PC by USB ^w^"), 120);
 }
 
 /**
