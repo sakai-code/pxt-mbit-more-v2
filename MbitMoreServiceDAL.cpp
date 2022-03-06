@@ -108,7 +108,7 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
   analogInP0Ch, analogInP1Ch, analogInP2Ch
   */
 
-  GattCharacteristic *mbitMoreChs[] = {
+  /**GattCharacteristic *mbitMoreChs[] = {
       commandCh,
       stateCh,
       directionCh,
@@ -133,15 +133,17 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
 
   // Setup callbacks for events.
   uBit.ble->onDataWritten(this, &MbitMoreServiceDAL::onDataWritten);
+  */
 }
 
 /**
    * Invoked when BLE connected.
    */
 void MbitMoreServiceDAL::onBLEConnected(MicroBitEvent _e) {
-  mbitMore->updateVersionData();
+  /**mbitMore->updateVersionData();
   uBit.ble->gattServer().write(commandCh->getValueHandle(), commandChBuffer,
                                MM_CH_BUFFER_SIZE_COMMAND);
+                               */
 }
 
 /**
@@ -181,16 +183,17 @@ void MbitMoreServiceDAL::onDataWritten(const GattWriteCallbackParams *params) {
  * @brief Notify action event.
  */
 void MbitMoreServiceDAL::notifyActionEvent() {
-  uBit.ble->gattServer().notify(actionEventCh->getValueHandle(),
+  /**uBit.ble->gattServer().notify(actionEventCh->getValueHandle(),
                                 actionEventChBuffer, MM_CH_BUFFER_SIZE_NOTIFY);
+                                */
 }
 
 /**
  * @brief Notify pin event.
  */
 void MbitMoreServiceDAL::notifyPinEvent() {
-  uBit.ble->gattServer().notify(pinEventCh->getValueHandle(), pinEventChBuffer,
-                                MM_CH_BUFFER_SIZE_NOTIFY);
+  /**uBit.ble->gattServer().notify(pinEventCh->getValueHandle(), pinEventChBuffer,
+                                MM_CH_BUFFER_SIZE_NOTIFY); */
 }
 
 /**
@@ -202,7 +205,7 @@ void MbitMoreServiceDAL::notify() {}
  * Update all GPIO and sensors state.
  */
 void MbitMoreServiceDAL::update() {
-  if (uBit.ble->gap().getState().connected) {
+ /** if (uBit.ble->gap().getState().connected) {
     mbitMore->updateState(stateChBuffer);
     uBit.ble->gattServer().write(stateCh->getValueHandle(), stateChBuffer,
                                  MM_CH_BUFFER_SIZE_STATE);
@@ -213,6 +216,7 @@ void MbitMoreServiceDAL::update() {
   } else {
     mbitMore->displayFriendlyName();
   }
+  */
 }
 
 #endif // !MICROBIT_CODAL
