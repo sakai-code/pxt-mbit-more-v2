@@ -100,7 +100,7 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
       this, &MbitMoreServiceDAL::onReadAnalogIn);
   analogInP2Ch->requireSecurity(SecurityManager::MICROBIT_BLE_SECURITY_LEVEL);
  */ //add disable ble 
-  /*
+  /**
   stateCh = digitalIn[4], lightLevel[1], temperature[1], microphone[1]
   directionCh = acceleration[10], magnet[8]
   pinEventCh = pinEvent
