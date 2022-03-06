@@ -133,7 +133,7 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
       this,
       &MbitMoreDevice::onGestureChanged,
       MESSAGE_BUS_LISTENER_QUEUE_IF_BUSY);
-
+/**
   uBit.messageBus.listen(
       MICROBIT_ID_BLE,
       MICROBIT_BLE_EVT_CONNECTED,
@@ -146,6 +146,7 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
       this,
       &MbitMoreDevice::onBLEDisconnected,
       MESSAGE_BUS_LISTENER_QUEUE_IF_BUSY);
+*/ // add disable BLE
 #if MBIT_MORE_USE_SERIAL
   serialService = new MbitMoreSerial(*this);
 #endif // MBIT_MORE_USE_SERIAL
@@ -195,12 +196,15 @@ void MbitMoreDevice::updateVersionData() {
  * @param _e event which has connection data
  */
 void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
+  /**
+
 #if MICROBIT_CODAL
   fiber_sleep(100); // to change pull-mode in micro:bit v2
 #endif // MICROBIT_CODAL
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
   uBit.display.print("M");
+  */ //add disable BLE
 }
 
 /**
@@ -209,15 +213,19 @@ void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
  * @param _e event which has disconnection data
  */
 void MbitMoreDevice::onBLEDisconnected(MicroBitEvent _e) {
-  uBit.reset(); // reset to off microphone and its LED.
+  
+  //uBit.reset(); // reset to off microphone and its LED.
 }
 
 void MbitMoreDevice::onSerialConnected() {
+  /**
   uBit.ble->stopAdvertising();
+  */ //add disable BLE
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
   uBit.display.print("M");
   serialConnected = true;
+  
 }
 
 /**

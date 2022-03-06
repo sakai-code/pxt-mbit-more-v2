@@ -5,10 +5,10 @@
 
 #if MICROBIT_CODAL
 // v2 is unstable and malfunction with MakeCode editor
-#define MBIT_MORE_USE_SERIAL 0 // 1 for use USB serial
+#define MBIT_MORE_USE_SERIAL 1 // 1 for use USB serial
 #else // MICROBIT_CODAL
 // v1 has not enough memory space
-#define MBIT_MORE_USE_SERIAL 0 // 1 for use USB serial
+#define MBIT_MORE_USE_SERIAL 1 // 1 for use USB serial
 #endif // MICROBIT_CODAL
 
 #define MBIT_MORE_DATA_RECEIVED 8000
