@@ -477,6 +477,16 @@ private:
    * @return false the pin is not a GPIO
    */
   bool isGpio(int pinIndex);
+
+
+
+/**
+ * @brief radio function test
+ * 
+ */
+void radio ();
+
+
 };
 
 #endif // MBIT_MORE_DEVICE_H

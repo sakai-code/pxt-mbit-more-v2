@@ -343,6 +343,10 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
             &MbitMoreDevice::onButtonChanged);
       }
     }
+  } else if (command == MbitMoreCommand::CMD_RADIO) {
+
+    radio();// add
+
   }
 }
 
@@ -960,4 +964,22 @@ bool MbitMoreDevice::isGpio(int pinIndex) {
       return true;
   }
   return false;
+}
+
+
+void MbitMoreDevice::radio(){
+   uBit.radio.enable();
+
+  uBit.radio.setGroup(1);
+
+  while(true){
+    uBit.radio.datagram.send("2");
+    uBit.sleep(100);
+
+
+  }
+
+
+
+
 }
