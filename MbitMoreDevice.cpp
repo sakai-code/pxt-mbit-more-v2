@@ -150,6 +150,10 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
 #if MBIT_MORE_USE_SERIAL
   serialService = new MbitMoreSerial(*this);
 #endif // MBIT_MORE_USE_SERIAL
+
+ uBit.radio.enable();  //test
+
+  uBit.radio.setGroup(1); //test
 }
 
 MbitMoreDevice::~MbitMoreDevice() {
@@ -346,6 +350,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
   } else if (command == MbitMoreCommand::CMD_RADIO) {
 
     radio();// add
+      uBit.display.scrollAsync(ManagedString("b"), 120);
 
   }
 }
@@ -968,16 +973,22 @@ bool MbitMoreDevice::isGpio(int pinIndex) {
 
 
 void MbitMoreDevice::radio(){
-   uBit.radio.enable();
-
-  uBit.radio.setGroup(1);
-
-  while(true){
-    uBit.radio.datagram.send("2");
-    uBit.sleep(100);
+  uBit.display.scrollAsync(ManagedString("a"), 120);
 
 
-  }
+
+
+ 
+   PacketBuffer b(data,36);
+
+   
+
+    uBit.radio.datagram.send(b);
+    
+    
+
+
+  
 
 
 
