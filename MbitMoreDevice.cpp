@@ -980,6 +980,8 @@ void MbitMoreDevice::radio(){
 
  
    PacketBuffer b(data,36);
+    int length = b.length();
+     uint8_t *bytes = b.getBytes();
 
    
 
