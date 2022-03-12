@@ -89,7 +89,7 @@ void copyManagedString(char *dst, ManagedString mstr, size_t maxLength) {
 #include "MbitMoreDevice.h"
 
 #include "MbitMoreRadio.h" //add radio service
-// MbitMoreRadio  Radio(0,7); //add radio serivice
+MbitMoreRadio  Radio(0,7); //add radio serivice
 
 /**
  * Constructor.
@@ -356,8 +356,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
     }
     } else if (command == MbitMoreCommand::CMD_RADIO) {
 
-      /**
-    
+  
     const int Radiocommand = data[0] & 0b11111;
 
     if (Radiocommand == MbitMoreRadioControlCommand::SETGROUP ){
@@ -366,7 +365,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
     } else if (command == MbitMoreRadioControlCommand::SETSIGNALPOWER){
 
     }
-    */
+    
 
 
    }
