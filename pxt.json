@@ -24,6 +24,8 @@
         "MbitMoreService.h",
         "MbitMoreServiceDAL.cpp",
         "MbitMoreServiceDAL.h",
+        "MbitMoreRadio.h",
+        "MbitMoreRadio.cpp",
         "_locales/en/pxt-mbit-more-v2-strings.json",
         "_locales/ja/pxt-mbit-more-v2-strings.json"
     ],

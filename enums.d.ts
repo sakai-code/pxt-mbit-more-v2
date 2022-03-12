@@ -227,6 +227,29 @@
     RES_WRITE = 0x11,
     RES_NOTIFY = 0x21,
     }
+
+
+    declare const enum MbitMoreRadioPacketState
+    {
+    NUM = 0,
+    STRING_AND_NUMBER = 1,
+    STRING = 2,
+    info = 3,
+    UINT64LENUMBER = 4,
+    STRING_AND_UINT64LENUMBER = 5,
+
+    }
+
+
+    declare const enum MbitMoreRadioControlCommand
+    { SETGROUP = 0,
+    SETSIGNALPOWER = 1,
+    SENDSTRING = 2,
+    SENDNUMBER = 3,
+    GETLASTPACKET = 4,
+    GETLASTPACKETSIGNAL = 5,
+
+    }
 declare namespace MbitMore {
 }
 

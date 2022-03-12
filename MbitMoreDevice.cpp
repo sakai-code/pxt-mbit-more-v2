@@ -4,10 +4,14 @@
 #include "MicroBit.h"
 #include "MicroBitConfig.h"
 
+
 #if MICROBIT_CODAL
 // microphone sound level
 #include "LevelDetector.h"
 #include "LevelDetectorSPL.h"
+
+
+
 
 #define MICROPHONE_MIN 52.0f
 #define MICROPHONE_MAX 120.0f
@@ -84,6 +88,9 @@ void copyManagedString(char *dst, ManagedString mstr, size_t maxLength) {
 
 #include "MbitMoreDevice.h"
 
+#include "MbitMoreRadio.h" //add radio service
+// MbitMoreRadio  Radio(0,7); //add radio serivice
+
 /**
  * Constructor.
  * Create a representation of the device for Microbit More service.
@@ -151,9 +158,9 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   serialService = new MbitMoreSerial(*this);
 #endif // MBIT_MORE_USE_SERIAL
 
- uBit.radio.enable();  //test
 
-  uBit.radio.setGroup(1); //test
+
+
 }
 
 MbitMoreDevice::~MbitMoreDevice() {
@@ -347,12 +354,28 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
             &MbitMoreDevice::onButtonChanged);
       }
     }
-  } else if (command == MbitMoreCommand::CMD_RADIO) {
+    } else if (command == MbitMoreCommand::CMD_RADIO) {
 
-    radio();// add
-      uBit.display.scrollAsync(ManagedString("b"), 120);
+      /**
+    
+    const int Radiocommand = data[0] & 0b11111;
 
-  }
+    if (Radiocommand == MbitMoreRadioControlCommand::SETGROUP ){
+      Radio.Radiosetgroup(data[1]);
+      
+    } else if (command == MbitMoreRadioControlCommand::SETSIGNALPOWER){
+
+    }
+    */
+
+
+   }
+    
+
+  
+      
+
+  
 }
 
 /**
@@ -972,27 +995,3 @@ bool MbitMoreDevice::isGpio(int pinIndex) {
 }
 
 
-void MbitMoreDevice::radio(){
-  uBit.display.scrollAsync(ManagedString("a"), 120);
-
-
-
-
- 
-   PacketBuffer b(data,36);
-    int length = b.length();
-     uint8_t *bytes = b.getBytes();
-
-   
-
-    uBit.radio.datagram.send(b);
-    
-    
-
-
-  
-
-
-
-
-}

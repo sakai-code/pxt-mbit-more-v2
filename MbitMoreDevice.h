@@ -22,6 +22,7 @@ class MbitMoreServiceDAL;
 using MbitMoreService = MbitMoreServiceDAL;
 #endif // NOT MICROBIT_CODAL
 
+
 #if MICROBIT_CODAL
 #define LIGHT_LEVEL_SAMPLES_SIZE 11
 #define ANALOG_IN_SAMPLES_SIZE 5
@@ -484,11 +485,6 @@ private:
  * @brief radio function test
  * 
  */
-void radio ();
-
-  uint8_t data[32] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-
 
 };
-
 #endif // MBIT_MORE_DEVICE_H
