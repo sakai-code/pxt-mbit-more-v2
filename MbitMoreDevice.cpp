@@ -354,6 +354,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
             &MbitMoreDevice::onButtonChanged);
       }
     }
+    //radio function
     } else if (command == MbitMoreCommand::CMD_RADIO) {
 
   
@@ -363,8 +364,18 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       Radio.Radiosetgroup(data[1]);
       
     } else if (command == MbitMoreRadioControlCommand::SETSIGNALPOWER){
+      Radio.Radiosetsignalpower(data[1]);
+
+    } else if (command == MbitMoreRadioControlCommand::SENDSTRING){
+     //[1]　にパケットの判断　シフトして長さを判断させる
+  
+    } else if(command == MbitMoreRadioControlCommand::SENDNUMBER){
+
+    } else if(command == MbitMoreRadioControlCommand::GETLASTPACKET){
+
 
     }
+    
     
 
 

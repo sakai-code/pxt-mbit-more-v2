@@ -235,8 +235,7 @@
     STRING_AND_NUMBER = 1,
     STRING = 2,
     info = 3,
-    UINT64LENUMBER = 4,
-    STRING_AND_UINT64LENUMBER = 5,
+
 
     }
 
