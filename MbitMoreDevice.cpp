@@ -372,7 +372,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
      uint8_t buf[RADIOPACKETSIZE] ;
       
       memset(buf, 0, sizeof(buf));
-      memcpy(&buf[10], (&data[2]), length - 2);
+      memcpy(&buf[10], (&data[1]), length - 2);
       buf[0]= static_cast <uint8_t>(MbitMoreRadioPacketState::STRING); 
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
