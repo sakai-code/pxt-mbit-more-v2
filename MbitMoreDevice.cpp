@@ -367,11 +367,33 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       Radio.Radiosetsignalpower(data[1]);
 
     } else if (command == MbitMoreRadioControlCommand::SENDSTRING){
-     //[1]　にパケットの判断　シフトして長さを判断させる
+     //[1]　にパケットの判断　シフトして長さを判断させる 最大17文字の予定
+
+     uint8_t buf[RADIOPACKETSIZE] ;
+      
+      memset(buf, 0, sizeof(buf));
+      memcpy(&buf[10], (&data[2]), length - 2);
+      buf[0]= static_cast <uint8_t>(MbitMoreRadioPacketState::STRING); 
+      buf[1]=0x64; //dummy 
+      buf[2]=0x64; //dummy
+      buf[9]= length -2;
+      int len = RADIOPACKETSIZE;
+      Radio.sendrawpacket(buf,len);
+
+      
+
+      
   
     } else if(command == MbitMoreRadioControlCommand::SENDNUMBER){
 
+      //現状では整数のみ
+
+    } else if(command == MbitMoreRadioControlCommand::SENDVALUE){
+      //現状整数のみ
+
     } else if(command == MbitMoreRadioControlCommand::GETLASTPACKET){
+      //error時の対応用
+      
 
 
     }

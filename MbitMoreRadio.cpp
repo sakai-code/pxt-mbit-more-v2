@@ -35,13 +35,19 @@ void MbitMoreRadio::Radiosetgroup(int group){
 
 
 
-void MbitMoreRadio::sendrawpacket( uint8_t buf){
+void MbitMoreRadio::sendrawpacket( uint8_t buf[],int len){
+PacketBuffer b(buf,len);
+
+
+uBit.radio.datagram.send(b);
+
 
 
 }
 
 
 void MbitMoreRadio::onRadioreceived( MicroBitEvent e){
+
 
     
 

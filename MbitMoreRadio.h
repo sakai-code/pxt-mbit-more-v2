@@ -6,21 +6,22 @@
 
 enum MbitMoreRadioPacketState
 {
-    NUM = 0,
-    STRING_AND_NUMBER = 1,
-    STRING  = 2,
-    info = 3 , //not use
+    NUM = 0x00,
+    STRING_AND_NUMBER = 0x01,
+    STRING  = 0x02,
+    info = 0x03 , //not use
    
 
 }; 
 
 enum MbitMoreRadioControlCommand
-{ SETGROUP = 0,
-  SETSIGNALPOWER = 1,
-  SENDSTRING = 2,
-  SENDNUMBER = 3,
-  GETLASTPACKET = 4,
-  GETLASTPACKETSIGNAL = 5
+{ SETGROUP = 0x00,
+  SETSIGNALPOWER = 0x01,
+  SENDSTRING = 0x02,
+  SENDNUMBER = 0x03,
+  SENDVALUE = 0x04,
+  GETLASTPACKET = 0x05,
+  GETLASTPACKETSIGNAL = 0x06
 
 };
 
@@ -47,7 +48,7 @@ public:
 
   void onRadioreceived(MicroBitEvent e );
 
-  void sendrawpacket(uint8_t buf);
+  void sendrawpacket(uint8_t buf[],int len);
 
   ~MbitMoreRadio();
 
