@@ -2,14 +2,15 @@
 
 #include "MbitMoreRadio.h"
 
+static MbitMoreRadio *Radio;
 
-
-MbitMoreRadio::MbitMoreRadio(int group,int signalpower){
+MbitMoreRadio::MbitMoreRadio(MbitMoreDevice &_mbitMore) : mbitMore(_mbitMore) {
    
-uBit.messageBus.listen(MICROBIT_ID_RADIO, MICROBIT_RADIO_EVT_DATAGRAM, this,&MbitMoreRadio::onRadioreceived);
+//uBit.messageBus.listen(MICROBIT_ID_RADIO, MICROBIT_RADIO_EVT_DATAGRAM, this, &MbitMoreRadio::onRadioreceived);
 uBit.radio.enable();
- Radiosetgroup(group);
- Radiosetsignalpower(signalpower);
+uBit.display.scrollAsync("set");
+ Radiosetgroup(0);
+ Radiosetsignalpower(7);
 
 
 }
@@ -17,6 +18,7 @@ uBit.radio.enable();
 void MbitMoreRadio::Radiosetsignalpower(int signalpower){
 
  uBit.radio.setTransmitPower(signalpower);
+ uBit.display.scrollAsync("signal");
 
  
 
@@ -28,7 +30,7 @@ void MbitMoreRadio::Radiosetsignalpower(int signalpower){
 void MbitMoreRadio::Radiosetgroup(int group){
 
     uBit.radio.setGroup(group);
-
+     uBit.display.scrollAsync("group");
 
 
 }

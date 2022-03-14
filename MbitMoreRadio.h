@@ -1,7 +1,12 @@
+#include "MbitMoreCommon.h"
 #ifndef MBIT_MORE_RADIO_H
 #define MBIT_MORE_RADIO_H
 
+#include "MbitMoreDevice.h"
+
 #include "pxt.h"
+
+class MbitMoreDevice;
 
 
 enum MbitMoreRadioPacketState
@@ -15,13 +20,13 @@ enum MbitMoreRadioPacketState
 }; 
 
 enum MbitMoreRadioControlCommand
-{ SETGROUP = 0x00,
-  SETSIGNALPOWER = 0x01,
-  SENDSTRING = 0x02,
-  SENDNUMBER = 0x03,
-  SENDVALUE = 0x04,
-  GETLASTPACKET = 0x05,
-  GETLASTPACKETSIGNAL = 0x06
+{ SETGROUP = 0,
+  SETSIGNALPOWER = 1,
+  SENDSTRING = 2,
+  SENDNUMBER = 3,
+  SENDVALUE = 4,
+  GETLASTPACKET = 5,
+  GETLASTPACKETSIGNAL = 6
 
 };
 
@@ -39,7 +44,10 @@ class  MbitMoreRadio {
 
    
 public:
- MbitMoreRadio(int group ,int signalpower);
+
+MbitMoreDevice &mbitMore;
+
+ MbitMoreRadio(MbitMoreDevice &_mbitMore);
   uint8_t RECEIVEDLASTPACKET[RADIOPACKETSIZE] ;
 
   void Radiosetgroup(int group);

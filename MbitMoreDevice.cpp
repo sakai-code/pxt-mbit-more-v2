@@ -89,7 +89,7 @@ void copyManagedString(char *dst, ManagedString mstr, size_t maxLength) {
 #include "MbitMoreDevice.h"
 
 #include "MbitMoreRadio.h" //add radio service
-MbitMoreRadio  Radio(0,7); //add radio serivice
+ //add radio serivice
 
 /**
  * Constructor.
@@ -112,6 +112,7 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   }
 
   displayVersion();
+ 
 
   uBit.messageBus.listen(
       MICROBIT_ID_BUTTON_A, MICROBIT_EVT_ANY,
@@ -156,7 +157,10 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
 */ // add disable BLE
 #if MBIT_MORE_USE_SERIAL
   serialService = new MbitMoreSerial(*this);
+  
 #endif // MBIT_MORE_USE_SERIAL
+  //Radio = new MbitMoreRadio(*this);
+  uBit.radio.enable();
 
 
 
@@ -236,6 +240,7 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.display.stopAnimation(); // To stop display friendly name.
   uBit.display.print("M");
   serialConnected = true;
+
   
 }
 
@@ -361,46 +366,68 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
 
   
     const int Radiocommand = data[0] & 0b11111;
-     uBit.display.scrollAsync(Radiocommand);
+    
 
-    if (Radiocommand == MbitMoreRadioControlCommand::SETGROUP ){
-            uBit.display.scrollAsync("group");
-      Radio.Radiosetgroup(data[1]);
+
+    if (Radiocommand == 0 ){
+            uBit.display.scrollAsync(data[1]);
+      uBit.radio.setGroup(data[1]);
       
-    } else if (command == MbitMoreRadioControlCommand::SETSIGNALPOWER){
-      Radio.Radiosetsignalpower(data[1]);
+    } else if (Radiocommand == 1){
+       uBit.display.scrollAsync(data[1]);
+       uBit.radio.setTransmitPower(data[1]);
 
-    } else if (command == MbitMoreRadioControlCommand::SENDSTRING){
+    } else if (Radiocommand == 2){
+      uBit.display.scrollAsync(Radiocommand);
      //[1]　にパケットの判断　シフトして長さを判断させる 最大17文字の予定
+
+
+     
 
      uint8_t buf[RADIOPACKETSIZE] ;
 
       
       memset(buf, 0, sizeof(buf));
       memcpy(&buf[10], (&data[1]), length - 2);
-      buf[0]= static_cast <uint8_t>(MbitMoreRadioPacketState::STRING); 
+      buf[0]= 0x02; 
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
       buf[9]= length -2;
-      int len = RADIOPACKETSIZE;
-      Radio.sendrawpacket(buf,len);
-       uBit.display.scrollAsync("sendstring");
+      PacketBuffer b(buf,RADIOPACKETSIZE);
+      uBit.radio.datagram.send(b);
+    
+      
 
       
 
       
   
-    } else if(command == MbitMoreRadioControlCommand::SENDNUMBER){
+    } else if(Radiocommand == 3){
+      
+     uint8_t buf[RADIOPACKETSIZE] ;
+
+      
+      memset(buf, 0, sizeof(buf));
+      memcpy(&buf[10], (&data[1]), length - 2);
+      buf[0]= 0x00; 
+      buf[1]=0x64; //dummy 
+      buf[2]=0x64; //dummy
+      buf[9]= length -2;
+      PacketBuffer b(buf,RADIOPACKETSIZE);
+      uBit.radio.datagram.send(b);
+    
 
       //現状では整数のみ
 
-    } else if(command == MbitMoreRadioControlCommand::SENDVALUE){
+    } else if(Radiocommand == MbitMoreRadioControlCommand::SENDVALUE){
       //現状整数のみ
 
-    } else if(command == MbitMoreRadioControlCommand::GETLASTPACKET){
+    } else if(Radiocommand == MbitMoreRadioControlCommand::GETLASTPACKET){
       //error時の対応用
       
 
+
+    }else {    uBit.display.scrollAsync(Radiocommand);
 
     }
     

@@ -7,7 +7,8 @@
 #include "MicroBitConfig.h"
 
 #include "MbitMoreCommon.h"
-
+#include "MbitMoreRadio.h"
+class MbitMoreRadio;
 #if MBIT_MORE_USE_SERIAL
 #include "MbitMoreSerial.h"
 class MbitMoreSerial;
@@ -134,7 +135,8 @@ public:
   MbitMoreSerial *serialService;
 #endif // MBIT_MORE_USE_SERIAL
 
-  // ---------------------
+  // ---------------------radio
+ MbitMoreRadio *Radio;
 
   /**
    * @brief Whether the serial port communication is started. 
