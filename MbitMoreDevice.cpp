@@ -356,11 +356,15 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
     }
     //radio function
     } else if (command == MbitMoreCommand::CMD_RADIO) {
+     
+      
 
   
     const int Radiocommand = data[0] & 0b11111;
+     uBit.display.scrollAsync(Radiocommand);
 
     if (Radiocommand == MbitMoreRadioControlCommand::SETGROUP ){
+            uBit.display.scrollAsync("group");
       Radio.Radiosetgroup(data[1]);
       
     } else if (command == MbitMoreRadioControlCommand::SETSIGNALPOWER){
@@ -370,6 +374,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
      //[1]　にパケットの判断　シフトして長さを判断させる 最大17文字の予定
 
      uint8_t buf[RADIOPACKETSIZE] ;
+
       
       memset(buf, 0, sizeof(buf));
       memcpy(&buf[10], (&data[1]), length - 2);
@@ -379,6 +384,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       buf[9]= length -2;
       int len = RADIOPACKETSIZE;
       Radio.sendrawpacket(buf,len);
+       uBit.display.scrollAsync("sendstring");
 
       
 
@@ -1000,7 +1006,7 @@ void MbitMoreDevice::setServoValue(int pinIndex, int angle, int range,
 void MbitMoreDevice::displayFriendlyName() {
   if (serialConnected)
     return;
-  uBit.display.scrollAsync(ManagedString("connnect PC by USB ^w^"), 120);
+  uBit.display.scrollAsync(ManagedString("connect PC by USB ^w^"), 120);
 }
 
 /**
