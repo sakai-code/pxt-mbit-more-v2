@@ -1,6 +1,6 @@
 
 #include "pxt.h"
-
+#include "pxtbase.h"
 #include "MicroBit.h"
 #include "MicroBitConfig.h"
 
@@ -159,8 +159,8 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   serialService = new MbitMoreSerial(*this);
   
 #endif // MBIT_MORE_USE_SERIAL
-  //Radio = new MbitMoreRadio(*this);
-  uBit.radio.enable();
+  Radio = new MbitMoreRadio(*this);
+  //uBit.radio.enable();
 
 
 
@@ -365,26 +365,21 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       
 
   
-    const int Radiocommand = data[0] & 0b11111;
+    const uint8_t Radiocommand = data[0] & 0b11111;
     
 
 
-    if (Radiocommand == 0 ){
-            uBit.display.scrollAsync(data[1]);
-      uBit.radio.setGroup(data[1]);
-      
-    } else if (Radiocommand == 1){
-       uBit.display.scrollAsync(data[1]);
-       uBit.radio.setTransmitPower(data[1]);
-
-    } else if (Radiocommand == 2){
-      uBit.display.scrollAsync(Radiocommand);
-     //[1]　にパケットの判断　シフトして長さを判断させる 最大17文字の予定
-
-
+    if (Radiocommand == MbitMoreRadioControlCommand::SETGROUP ){
      
+      uint8_t group = data[1];
+      Radio->Radiosetgroup(group);
+      
+    } else if (Radiocommand == MbitMoreRadioControlCommand::SETSIGNALPOWER){
+      uint8_t singnalpower = data[1];
+       Radio->Radiosetsignalpower(singnalpower); 
 
-     uint8_t buf[RADIOPACKETSIZE] ;
+    } else if (Radiocommand == MbitMoreRadioControlCommand::SENDSTRING){
+        uint8_t buf[RADIOPACKETSIZE] ;
 
       
       memset(buf, 0, sizeof(buf));
@@ -393,8 +388,11 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
       buf[9]= length -2;
-      PacketBuffer b(buf,RADIOPACKETSIZE);
-      uBit.radio.datagram.send(b);
+      Radio->sendrawpacket(buf,RADIOPACKETSIZE);
+      /**
+      * PacketBuffer b(buf,RADIOPACKETSIZE);
+      *uBit.radio.datagram.send(b);
+      */
     
       
 
@@ -402,7 +400,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
 
       
   
-    } else if(Radiocommand == 3){
+    } else if(Radiocommand == MbitMoreRadioControlCommand::SENDNUMBER){
       
      uint8_t buf[RADIOPACKETSIZE] ;
 

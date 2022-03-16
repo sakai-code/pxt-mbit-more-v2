@@ -8,7 +8,7 @@ MbitMoreRadio::MbitMoreRadio(MbitMoreDevice &_mbitMore) : mbitMore(_mbitMore) {
    
 //uBit.messageBus.listen(MICROBIT_ID_RADIO, MICROBIT_RADIO_EVT_DATAGRAM, this, &MbitMoreRadio::onRadioreceived);
 uBit.radio.enable();
-uBit.display.scrollAsync("set");
+
  Radiosetgroup(0);
  Radiosetsignalpower(7);
 
@@ -30,7 +30,7 @@ void MbitMoreRadio::Radiosetsignalpower(int signalpower){
 void MbitMoreRadio::Radiosetgroup(int group){
 
     uBit.radio.setGroup(group);
-     uBit.display.scrollAsync("group");
+    
 
 
 }

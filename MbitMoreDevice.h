@@ -9,6 +9,7 @@
 #include "MbitMoreCommon.h"
 #include "MbitMoreRadio.h"
 class MbitMoreRadio;
+#include "pxtbase.h"
 #if MBIT_MORE_USE_SERIAL
 #include "MbitMoreSerial.h"
 class MbitMoreSerial;
