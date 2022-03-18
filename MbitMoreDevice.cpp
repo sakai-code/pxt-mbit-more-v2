@@ -400,14 +400,14 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
 
       
   
-    } else if(Radiocommand == MbitMoreRadioControlCommand::SENDNUMBER){
+    } else if(Radiocommand == MbitMoreRadioControlCommand::SENDINTNUMBER){
       
      uint8_t buf[RADIOPACKETSIZE] ;
 
       
       memset(buf, 0, sizeof(buf));
       memcpy(&buf[9], (&data[1]), length - 2);
-      buf[0]= MbitMoreRadioPacketState::DOUBLE; 
+      buf[0]= MbitMoreRadioPacketState::NUM; 
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
       Radio->sendrawpacket(buf,RADIOPACKETSIZE);
@@ -429,7 +429,17 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
 
     
 
-    } else if(Radiocommand == MbitMoreRadioControlCommand::GETLASTPACKET){
+    } else if(Radiocommand == MbitMoreRadioControlCommand::SENDDOUBLENUMBER){
+      uint8_t buf[RADIOPACKETSIZE] ;
+
+      
+      memset(buf, 0, sizeof(buf));
+      memcpy(&buf[9], (&data[1]), length - 2);
+      buf[0]= MbitMoreRadioPacketState::DOUBLE; 
+      buf[1]=0x64; //dummy 
+      buf[2]=0x64; //dummy
+      Radio->sendrawpacket(buf,RADIOPACKETSIZE);
+    
       //error
       
 
