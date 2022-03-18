@@ -384,7 +384,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
       
       memset(buf, 0, sizeof(buf));
       memcpy(&buf[10], (&data[1]), length - 2);
-      buf[0]= 0x02; 
+      buf[0]= MbitMoreRadioPacketState::STRING; 
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
       buf[9]= length -2;
@@ -406,22 +406,31 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
 
       
       memset(buf, 0, sizeof(buf));
-      memcpy(&buf[10], (&data[1]), length - 2);
-      buf[0]= 0x00; 
+      memcpy(&buf[9], (&data[1]), length - 2);
+      buf[0]= MbitMoreRadioPacketState::DOUBLE; 
       buf[1]=0x64; //dummy 
       buf[2]=0x64; //dummy
-      buf[9]= length -2;
-      PacketBuffer b(buf,RADIOPACKETSIZE);
-      uBit.radio.datagram.send(b);
+      Radio->sendrawpacket(buf,RADIOPACKETSIZE);
     
 
-      //現状では整数のみ
+      
 
     } else if(Radiocommand == MbitMoreRadioControlCommand::SENDVALUE){
-      //現状整数のみ
+       uint8_t buf[RADIOPACKETSIZE] ;
+
+      
+      memset(buf, 0, sizeof(buf));
+      memcpy(&buf[9], (&data[1]), length - 2);
+      buf[0]= MbitMoreRadioPacketState::value; 
+      buf[1]=0x64; //dummy 
+      buf[2]=0x64; //dummy
+      Radio->sendrawpacket(buf,RADIOPACKETSIZE);
+
+
+    
 
     } else if(Radiocommand == MbitMoreRadioControlCommand::GETLASTPACKET){
-      //error時の対応用
+      //error
       
 
 

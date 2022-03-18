@@ -18,7 +18,7 @@ uBit.radio.enable();
 void MbitMoreRadio::Radiosetsignalpower(int signalpower){
 
  uBit.radio.setTransmitPower(signalpower);
- uBit.display.scrollAsync("signal");
+
 
  
 

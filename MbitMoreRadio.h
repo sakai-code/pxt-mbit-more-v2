@@ -15,6 +15,8 @@ enum MbitMoreRadioPacketState
     STRING_AND_NUMBER = 0x01,
     STRING  = 0x02,
     info = 0x03 , //not use
+    DOUBLE = 0x04,
+    value = 0x05
    
 
 }; 
