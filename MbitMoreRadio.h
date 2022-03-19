@@ -6,6 +6,8 @@
 
 #include "pxt.h"
 
+
+
 class MbitMoreDevice;
 
 
@@ -37,11 +39,9 @@ enum MbitMoreRadioControlCommand
 #define PACKETSTATEINFO  0
 
 
-
 class  MbitMoreRadio {
     private:
 
-    uint8_t a = 1;
  
 
    
@@ -59,6 +59,7 @@ MbitMoreDevice &mbitMore;
   void onRadioreceived(MicroBitEvent e );
 
   void sendrawpacket(uint8_t buf[],int len);
+
 
   ~MbitMoreRadio();
 
