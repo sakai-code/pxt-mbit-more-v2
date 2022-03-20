@@ -159,10 +159,64 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   serialService = new MbitMoreSerial(*this);
   
 #endif // MBIT_MORE_USE_SERIAL
+
+  uBit.messageBus.listen(MICROBIT_ID_RADIO, 
+  MICROBIT_RADIO_EVT_DATAGRAM,
+   this,
+   &MbitMoreDevice::onRadioreceived,
+  MESSAGE_BUS_LISTENER_QUEUE_IF_BUSY
+   );
+
+
+
   Radio = new MbitMoreRadio(*this);
   //uBit.radio.enable();
 
+ 
 
+
+
+
+}
+
+
+
+
+
+void MbitMoreDevice::onRadioreceived( MicroBitEvent e){
+     PacketBuffer b;
+b = uBit.radio.datagram.recv();
+
+int length = b.length();
+uint8_t *bytes = b.getBytes();
+int signal = b.getRSSI();
+uint8_t signalbuf [4] ={ 
+static_cast<uint8_t>(signal >> 24 && 0x100),
+static_cast<uint8_t>(signal >>16 && 0x100) ,
+static_cast<uint8_t>(signal >>8 && 0x100),
+static_cast<uint8_t>(signal  && 0x100)
+};
+   
+
+uint8_t buf[RADIOSENDPACKETSIZE]; //[0...31]=radio packet [32..35]=RSSI
+
+ memset(buf, 0, sizeof(buf));
+  memcpy(buf, bytes, length);
+  for (int i = 0 ;i<4;i++) {buf [32+i] = signalbuf[i];};
+
+  uint8_t *sendBufpointer = buf;
+
+  if (serialConnected) {
+    serialService->notifyOnSerial(0x0200, sendBufpointer, RADIOSENDPACKETSIZE);
+    return;
+  }
+
+
+  //MbitMoreSerial::notifyOnSerial(0x0200, sendBufpointer,RADIOSENDPACKETSIZE);
+
+
+
+    
 
 
 }
@@ -430,7 +484,7 @@ void MbitMoreDevice::onCommandReceived(uint8_t *data, size_t length) {
     
 
     } else if(Radiocommand == MbitMoreRadioControlCommand::SENDDOUBLENUMBER){
-      uint8_t buf[RADIOPACKETSIZE] ;
+      uint8_t buf[RADIOPACKETSIZE];
 
       
       memset(buf, 0, sizeof(buf));

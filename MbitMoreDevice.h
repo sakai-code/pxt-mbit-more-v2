@@ -100,6 +100,8 @@ public:
   MbitMoreDevice(MbitMoreDevice &&) = delete;
   MbitMoreDevice &operator=(MbitMoreDevice &&) = delete;
 
+  
+
   /**
    * @brief Get the Instance object as singleton
    * 
@@ -144,6 +146,12 @@ public:
    * 
    */
   bool serialConnected = false;
+
+  /**
+ * @brief radio function 
+ * 
+ */
+void onRadioreceived( MicroBitEvent e);
 
   /**
    * @brief Index of controllabel GPIO pins.
@@ -484,10 +492,7 @@ private:
 
 
 
-/**
- * @brief radio function test
- * 
- */
+
 
 };
 #endif // MBIT_MORE_DEVICE_H

@@ -35,6 +35,7 @@ enum MbitMoreRadioControlCommand
 };
 
 #define RADIOPACKETSIZE  32 
+#define RADIOSENDPACKETSIZE 36
 
 #define PACKETSTATEINFO  0
 
@@ -56,7 +57,6 @@ MbitMoreDevice &mbitMore;
 
   void Radiosetsignalpower(int signalpower);
 
-  void onRadioreceived(MicroBitEvent e );
 
   void sendrawpacket(uint8_t buf[],int len);
 
