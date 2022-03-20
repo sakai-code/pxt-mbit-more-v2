@@ -57,11 +57,20 @@ b = uBit.radio.datagram.recv();
 
 int length = b.length();
 uint8_t *bytes = b.getBytes();
+int signal = b.getRSSI();
+uint8_t signalbuf [4] ={ 
+static_cast<uint8_t>(signal >> 24 && 0x100),
+static_cast<uint8_t>(signal >>16 && 0x100) ,
+static_cast<uint8_t>(signal >>8 && 0x100),
+static_cast<uint8_t>(signal  && 0x100)
+  };
 
 uint8_t buf[36];
 
  memset(buf, 0, sizeof(buf));
   memcpy(buf, bytes, length);
+  for (int i = 0 ;i<4;i++) {buf [32+i] = signalbuf[i];};
+
 
 
     
