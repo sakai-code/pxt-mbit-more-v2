@@ -207,7 +207,7 @@ uint8_t buf[RADIOSENDPACKETSIZE]; //[0...31]=radio packet [32..35]=RSSI
   uint8_t *sendBufpointer = buf;
 
   if (serialConnected) {
-    serialService->notifyOnSerial(0x0200, sendBufpointer, RADIOSENDPACKETSIZE);
+    serialService->notifyOnSerial(0x0140, sendBufpointer, RADIOSENDPACKETSIZE);
     return;
   }
 
