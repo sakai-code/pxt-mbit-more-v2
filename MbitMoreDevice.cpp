@@ -208,6 +208,9 @@ uint8_t buf[RADIOSENDPACKETSIZE]; //[0...31]=radio packet [32..35]=RSSI
 
   if (serialConnected) {
     serialService->notifyOnSerial(0x0140, sendBufpointer, RADIOSENDPACKETSIZE);
+    uBit.display.scrollAsync(ManagedString(" send"), 120);
+
+
     return;
   }
 
