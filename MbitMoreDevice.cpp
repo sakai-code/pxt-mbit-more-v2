@@ -191,10 +191,17 @@ int length = b.length();
 uint8_t *bytes = b.getBytes();
 int signal = b.getRSSI();
 uint8_t signalbuf [4] ={ 
-static_cast<uint8_t>(signal >> 24 && 0x100),
-static_cast<uint8_t>(signal >>16 && 0x100) ,
-static_cast<uint8_t>(signal >>8 && 0x100),
-static_cast<uint8_t>(signal  && 0x100)
+  (signal >> 24) & 0xFF, 
+   (signal >> 16) & 0xFF, 
+    (signal >> 8) & 0xFF, 
+     (signal >> 0) & 0xFF, 
+
+  /**
+static_cast<uint8_t>((signal >> 24  ) & 0xFF ),
+static_cast<uint8_t>((signal >>16 ) & 0xFF) ,
+static_cast<uint8_t>((signal >>8 ) & 0xFF),
+static_cast<uint8_t>((signal >> 0 )& 0xFF )
+*/
 };
    
 
@@ -208,7 +215,7 @@ uint8_t buf[RADIOSENDPACKETSIZE]; //[0...31]=radio packet [32..35]=RSSI
 
   if (serialConnected) {
     serialService->notifyOnSerial(0x0140, sendBufpointer, RADIOSENDPACKETSIZE);
-    uBit.display.scrollAsync(ManagedString(" send"), 120);
+   
 
 
     return;
