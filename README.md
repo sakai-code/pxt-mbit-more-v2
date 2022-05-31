@@ -1,7 +1,7 @@
 
-# Microbit More v2 MakeCode Extension
+# Microbit More v2 with Radio MakeCode Extension
 
-This is a MakeCode extension for [Microbit More v2](https://microbit-more.github.io/).
+This is a MakeCode extension for [Microbit More v2 with Radio ](https://sakai-labo.github.io/microbitMorev2-with-Radio.github.io/index-ja.html).
 
 ## Use as Extension
 
@@ -14,22 +14,11 @@ This repository can be added as an **extension** in MakeCode.
 * code on the editor
 * click **Download** (which takes about **1 minutes** to compile at first time)
 
-## Edit this project ![Build status badge](https://github.com/microbit-more/pxt-mbit-more-v2/workflows/MakeCode/badge.svg)
+## Edit this project 
 
 To edit this repository in MakeCode.
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **Import** then click on **Import URL**
-* paste **https://github.com/microbit-more/pxt-mbit-more-v2** and click import
+* paste **https://github.com/sakai-labo/pxt-mbit-more-v2-with-radio** and click import
 
-## Blocks preview
-
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
-
-![A rendered view of the blocks](https://github.com/microbit-more/pxt-mbit-more-v2/raw/master/.github/makecode/blocks.png)
-
-#### Metadata (used for search, rendering)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>

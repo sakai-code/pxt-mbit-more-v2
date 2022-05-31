@@ -6,6 +6,6 @@
   "MbitMore.startService|block": "Microbit Morev2サービスを開始する",
   "MbitMoreDataContentType.MM_DATA_NUMBER|block": "数値",
   "MbitMoreDataContentType.MM_DATA_TEXT|block": "文字列",
-  "MbitMore|block": "Microbit Morev2",
-  "{id:category}MbitMore": "Microbit More v2"
+  "MbitMore|block": "Microbit Morev2　with Radio",
+  "{id:category}MbitMore": "Microbit More v2 with Radio"
 }
