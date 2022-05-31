@@ -10,7 +10,7 @@ This repository can be added as an **extension** in MakeCode.
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
-* search for **https://github.com/microbit-more/pxt-mbit-more-v2** and import
+* search for **https://github.com/sakai-labo/pxt-mbit-more-v2-with-radio** and import
 * code on the editor
 * click **Download** (which takes about **1 minutes** to compile at first time)
 
